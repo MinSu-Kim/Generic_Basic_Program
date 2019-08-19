@@ -70,28 +70,18 @@ public class ErpFrame extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnTitle) {
-			actionPerformedBtnTitle(e);
+			ErpUIView(map.get(DtoType.TITLE));
 		}
 		if (e.getSource() == btnEmp) {
-			actionPerformedBtnEmp(e);
+			ErpUIView(map.get(DtoType.EMPLOYEE));
 		}
 		if (e.getSource() == btnDept) {
-			actionPerformedBtnDept(e);
+			ErpUIView(map.get(DtoType.DEPARTMENT));
 		}
 	}
 	
-	protected void actionPerformedBtnDept(ActionEvent e) {
-		map.get(DtoType.DEPARTMENT).loadData();
-		map.get(DtoType.DEPARTMENT).setVisible(true);
-	}
-
-	protected void actionPerformedBtnEmp(ActionEvent e) {
-		map.get(DtoType.EMPLOYEE).loadData();
-		map.get(DtoType.EMPLOYEE).setVisible(true);
-	}
-
-	protected void actionPerformedBtnTitle(ActionEvent e) {
-		map.get(DtoType.TITLE).loadData();
-		map.get(DtoType.TITLE).setVisible(true);
+	private void ErpUIView(ErpUI<?> erpUI) {
+		erpUI.loadData();
+		erpUI.setVisible(true);
 	}
 }

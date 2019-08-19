@@ -13,7 +13,7 @@ public class ErpMain {
 			public void run() {
 				try {
 					DataFileMgn dfm = new DataFileMgn();
-					
+					dfm.load();
 					ErpFrame frame = new ErpFrame();
 					frame.addWindowListener(new WindowAdapter() {
 						@Override
@@ -22,9 +22,7 @@ public class ErpMain {
 							JOptionPane.showMessageDialog(null, "저장되었습니다.");
 						}						
 					});
-					dfm.load();
 					frame.setDataFileMgn(dfm);
-//					frame.createPanels();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

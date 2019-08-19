@@ -26,6 +26,7 @@ public class ErpUI<T> extends JFrame implements ActionListener {
 
 	private AbstractList<T> pContentList;
 	private AbstractContent<T> pContent;
+	
 	private List<T> itemList;
 	private List<Department> deptList;
 	private List<Title> titleList;
