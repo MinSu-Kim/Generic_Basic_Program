@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.border.EmptyBorder;
 
+import project_erp.dto.Department;
+import project_erp.dto.Title;
 import project_erp.ui.content.AbstractContent;
 import project_erp.ui.list.AbstractList;
 
@@ -25,17 +27,23 @@ public class ErpUI<T> extends JFrame implements ActionListener {
 	private AbstractList<T> pContentList;
 	private AbstractContent<T> pContent;
 	private List<T> itemList;
+	private List<Department> deptList;
+	private List<Title> titleList;
 	
 	private JButton btnAdd;
 	private JButton btnCancel;
 
 	private JMenuItem mntmUpdate;
 	private JMenuItem mntmDelete;
-
-	public ErpUI(String title, AbstractContent<T> pContent, AbstractList<T> pContentList, List<T> itemList) {
-		this.pContent = pContent;
-		this.pContentList = pContentList;
+	
+	private DtoType type;
+	
+	public ErpUI(DtoType type, String title, List<T> itemList, List<Department> deptList, List<Title> titleLIList) {
+		this.type = type;
 		this.itemList = itemList;
+		this.deptList = deptList;
+		this.titleList = titleLIList;
+		
 		setTitle(title);
 		initComponents();
 	}
@@ -52,6 +60,7 @@ public class ErpUI<T> extends JFrame implements ActionListener {
 		contentPane.add(pNorth, BorderLayout.NORTH);
 		pNorth.setLayout(new BoxLayout(pNorth, BoxLayout.Y_AXIS));
 
+		pContent = PanelFactory.<T>createContent(type, itemList, deptList, titleList);
 		pNorth.add(pContent);
 		
 		JPanel pbtns = new JPanel();
@@ -65,6 +74,7 @@ public class ErpUI<T> extends JFrame implements ActionListener {
 		btnCancel.addActionListener(this);
 		pbtns.add(btnCancel);
 
+		pContentList = PanelFactory.<T>createList(type, itemList);
 		pContentList.setPopUpMenu(createPopUpMenu());
 		
 		contentPane.add(pContentList, BorderLayout.CENTER);

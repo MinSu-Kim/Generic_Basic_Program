@@ -15,15 +15,8 @@ import javax.swing.border.EmptyBorder;
 import project_erp.dto.Department;
 import project_erp.dto.Employee;
 import project_erp.dto.Title;
+import project_erp.ui.DtoType;
 import project_erp.ui.ErpUI;
-import project_erp.ui.content.AbstractContent;
-import project_erp.ui.content.PanelDepartment;
-import project_erp.ui.content.PanelEmployee;
-import project_erp.ui.content.PanelTitle;
-import project_erp.ui.list.AbstractList;
-import project_erp.ui.list.PanelDeptList;
-import project_erp.ui.list.PanelEmpList;
-import project_erp.ui.list.PanelTitleList;
 
 @SuppressWarnings("serial")
 public class ErpFrame extends JFrame implements ActionListener {
@@ -37,19 +30,11 @@ public class ErpFrame extends JFrame implements ActionListener {
 	private List<Department> deptList;
 	private List<Title> titleList;
 	
-	private AbstractContent<Title> pt;
-	private AbstractContent<Department> pd;
-	private AbstractContent<Employee> pe;
-	private AbstractList<Title> ptl;
-	private AbstractList<Department> pdl;
-	private AbstractList<Employee> pel;
-	
 	private Map<DtoType, ErpUI<?>> map = new HashMap<>();
 	
 	private static final String[] TITLES = {"직책 관리", "부서 관리", "사원 관리"};
 	public ErpFrame() {
 		initComponents();
-		
 	}
 
 	public void setDataFileMgn(DataFileMgn dfm) {
@@ -57,24 +42,9 @@ public class ErpFrame extends JFrame implements ActionListener {
 		this.deptList = dfm.getDeptList();
 		this.empList = dfm.getEmpList();
 		
-		pt = new PanelTitle();
-		pd = new PanelDepartment();
-		pe = new PanelEmployee();
-		
-		ptl = new PanelTitleList();
-		pdl = new PanelDeptList();
-		pel = new PanelEmpList();
-		
-		ptl.setItemList(titleList);
-		pdl.setItemList(deptList);
-		pel.setItemList(empList);
-		
-		((PanelEmployee)pe).setTitleList(titleList);
-		((PanelEmployee)pe).setDeptList(deptList);
-		
-		map.put(DtoType.DEPARTMENT, new ErpUI<>(TITLES[1], pd, pdl, deptList));
-		map.put(DtoType.EMPLOYEE, new ErpUI<>(TITLES[2], pe, pel, empList));
-		map.put(DtoType.TITLE, new ErpUI<>(TITLES[0], pt, ptl, titleList));
+		map.put(DtoType.DEPARTMENT, new ErpUI<>(DtoType.DEPARTMENT, TITLES[1], deptList, null, null));
+		map.put(DtoType.EMPLOYEE, 	new ErpUI<>(DtoType.EMPLOYEE,	TITLES[2], empList, deptList, titleList));
+		map.put(DtoType.TITLE, 		new ErpUI<>(DtoType.TITLE,		TITLES[0], titleList, null, null));
 	}
 
 	private void initComponents() {

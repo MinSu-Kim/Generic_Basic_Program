@@ -1,12 +1,14 @@
 package project_erp.ui.content;
 
 import java.awt.GridLayout;
+import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
+import project_erp.dto.Department;
 import project_erp.dto.Title;
 
 @SuppressWarnings("serial")
@@ -62,5 +64,15 @@ public class PanelTitle extends AbstractContent<Title> {
 	@Override
 	public JTextField getTfNo() {
 		return tfTitleNo;
+	}
+
+	@Override
+	public void setDeptList(List<Department> deptList) {
+		throw new UnsupportedOperationException();		
+	}
+
+	@Override
+	public void setTitleList(List<Title> titleList) {
+		throw new UnsupportedOperationException();		
 	}
 }
