@@ -32,7 +32,6 @@ public class ErpFrame extends JFrame implements ActionListener {
 	
 	private Map<DtoType, ErpUI<?>> map = new HashMap<>();
 	
-	private static final String[] TITLES = {"직책 관리", "부서 관리", "사원 관리"};
 	public ErpFrame() {
 		initComponents();
 	}
@@ -42,9 +41,9 @@ public class ErpFrame extends JFrame implements ActionListener {
 		this.deptList = dfm.getDeptList();
 		this.empList = dfm.getEmpList();
 		
-		map.put(DtoType.DEPARTMENT, new ErpUI<>(DtoType.DEPARTMENT, TITLES[1], deptList, null, null));
-		map.put(DtoType.EMPLOYEE, 	new ErpUI<>(DtoType.EMPLOYEE,	TITLES[2], empList, deptList, titleList));
-		map.put(DtoType.TITLE, 		new ErpUI<>(DtoType.TITLE,		TITLES[0], titleList, null, null));
+		map.put(DtoType.DEPARTMENT, new ErpUI<>(DtoType.DEPARTMENT, DtoType.DEPARTMENT.getName(), deptList, null, null));
+		map.put(DtoType.EMPLOYEE, 	new ErpUI<>(DtoType.EMPLOYEE,	DtoType.EMPLOYEE.getName(), empList, deptList, titleList));
+		map.put(DtoType.TITLE, 		new ErpUI<>(DtoType.TITLE,		DtoType.TITLE.getName(), titleList, null, null));
 	}
 
 	private void initComponents() {
@@ -56,15 +55,15 @@ public class ErpFrame extends JFrame implements ActionListener {
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(1, 0, 0, 0));
 
-		btnEmp = new JButton("사원 관리");
+		btnEmp = new JButton(DtoType.EMPLOYEE.getName());
 		btnEmp.addActionListener(this);
 		contentPane.add(btnEmp);
 
-		btnDept = new JButton("부서 관리");
+		btnDept = new JButton(DtoType.DEPARTMENT.getName());
 		btnDept.addActionListener(this);
 		contentPane.add(btnDept);
 
-		btnTitle = new JButton("직책 관리");
+		btnTitle = new JButton(DtoType.TITLE.getName());
 		btnTitle.addActionListener(this);
 		contentPane.add(btnTitle);
 	}
